@@ -1,2 +1,40 @@
 # libFM
 Logger, BeanManager, Utils etc for Android Library (Kotlin)
+
+## Demo ScreenShot
+
+## Setup
+Project build.gradle
+```Groovy
+allprojects {
+    repositories {
+        maven { url 'https://jitpack.io' }
+    }
+}
+```
+
+App build.gradle
+```Groovy
+dependencies {
+    implementation 'com.github.freemmer:libFM:0.1.0'
+}
+```
+
+## How to use
+
+## License 
+```code
+This software is licensed under the [Apache 2 license](LICENSE), quoted below.
+
+Copyright 2019 freemmer. <http://freemmer.tistory.com>
+
+Licensed under the Apache License, Version 2.0 (the "License"); you may not
+use this project except in compliance with the License. You may obtain a copy
+of the License at http://www.apache.org/licenses/LICENSE-2.0.
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+License for the specific language governing permissions and limitations under
+the License.
+```
