@@ -15,10 +15,11 @@ import android.support.v7.app.AppCompatActivity
 import kotlin.collections.ArrayList
 
 /**
- * Created by freemmer on 23/01/2019.
+ * Created by freemmer on 11/01/2019.
  * History
- *    - 23/01/2019 Create file
+ *    - 11/01/2019 Create file
  */
+
 class FMCheckPermission (
     private val activity: Activity,
     private val inter: FMICheckPermission
@@ -41,7 +42,7 @@ class FMCheckPermission (
                     } else  {
                         if (packageName != null) {
                             managerOverlayIntent =
-                                    Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:$packageName"))
+                                Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:$packageName"))
                             activity.startActivityForResult(managerOverlayIntent, OVERLAY_PERMISSION_REQ_CODE)
                         }
                     }
@@ -149,7 +150,7 @@ abstract class FMCheckPermissionActivity: Activity(), FMICheckPermission {
             checker = FMCheckPermission(this, this)
         }
     }
-    fun checkPermission(permissions: Array<String>, packageName: String?) {
+    fun checkPermission(permissions: Array<String>, packageName: String? = null) {
         checkLateInit()
         checker.execute(permissions, packageName)
     }
@@ -175,7 +176,7 @@ abstract class FMCheckPermissionAppCompatActivity: AppCompatActivity(), FMICheck
             checker = FMCheckPermission(this, this)
         }
     }
-    fun checkPermission(permissions: Array<String>, packageName: String?) {
+    fun checkPermission(permissions: Array<String>, packageName: String? = null) {
         checkLateInit()
         checker.execute(permissions, packageName)
     }
@@ -201,7 +202,7 @@ abstract class FMCheckPermissionAppFragmentActivity: FragmentActivity(), FMIChec
             checker = FMCheckPermission(this, this)
         }
     }
-    fun checkPermission(permissions: Array<String>, packageName: String?) {
+    fun checkPermission(permissions: Array<String>, packageName: String? = null) {
         checkLateInit()
         checker.execute(permissions, packageName)
     }
