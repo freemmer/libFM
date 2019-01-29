@@ -8,10 +8,10 @@ Logger, BeanManager, Utils etc for Android Library (Kotlin)
 
 ## Demo ScreenShot
 + Basic log.
-![Screenshot](https://github.com/freemmer/FMNotification/blob/master/Screenshots/logcat_basic.jpg)
+![Screenshot](https://github.com/freemmer/libFM/blob/master/Screenshots/logcat_basic.jpg)
 
 + When notification message is tapped.
-![Screenshot](https://github.com/freemmer/FMNotification/blob/master/Screenshots/logcat_tapped_notification.jpg)
+![Screenshot](https://github.com/freemmer/libFM/blob/master/Screenshots/logcat_tapped_notification.jpg)
 
 ## Setup
 ★ By default, Must be FCM ready for use. (Register your app to use FCM with Firebase and apply google-services.json)
