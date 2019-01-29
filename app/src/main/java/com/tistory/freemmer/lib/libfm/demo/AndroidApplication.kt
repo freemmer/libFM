@@ -4,6 +4,7 @@ import android.app.Application
 import com.tistory.freemmer.lib.libfm.libFM
 import com.tistory.freemmer.lib.libfm.logger.FMILog
 import com.tistory.freemmer.lib.libfm.logger.impl.FMLogCatImpl
+import com.tistory.freemmer.lib.libfm.notification.FMNotification
 import com.tistory.freemmer.lib.libfm.platform.FMBeanManager
 
 /**
@@ -15,6 +16,14 @@ class AndroidApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
+
+        // When only payload type is used like 'GCM'
+        //FMNotification.PAYLOAD_TITLE_KEY = "title"
+        //FMNotification.PAYLOAD_BODY_KEY = "body"
+        // In case automatically create default channel
+        FMNotification.initialize(this)
+        // In case manually create default channel
+        //FMNotification.instance(this).createChannel("default_channel_id", "Default Channel")
 
         if (BuildConfig.DEBUG) {
             libFM.initialize().enableDebugLog()

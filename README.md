@@ -4,10 +4,18 @@
 # libFM
 Logger, BeanManager, Utils etc for Android Library (Kotlin)
 - [Contains the FMCheckPermission repository](https://github.com/freemmer/FMCheckPermission)
+- [Contains the FMNotification repository](https://github.com/freemmer/FMNotification)
 
 ## Demo ScreenShot
++ Basic log.
+![Screenshot](https://github.com/freemmer/FMNotification/blob/master/Screenshots/logcat_basic.jpg)
+
++ When notification message is tapped.
+![Screenshot](https://github.com/freemmer/FMNotification/blob/master/Screenshots/logcat_tapped_notification.jpg)
 
 ## Setup
+★ By default, Must be FCM ready for use. (Register your app to use FCM with Firebase and apply google-services.json)
+
 Project build.gradle
 ```Groovy
 allprojects {
@@ -20,11 +28,14 @@ allprojects {
 App build.gradle
 ```Groovy
 dependencies {
-    implementation 'com.github.freemmer:libFM:1.2.2'
+    implementation 'com.github.freemmer:libFM:1.2.3'
 }
 ```
 
 ## How to use
+Reference
+- [Contains the FMCheckPermission repository](https://github.com/freemmer/FMCheckPermission)
+- [Contains the FMNotification repository](https://github.com/freemmer/FMNotification)
 
 ## License 
 ```code
