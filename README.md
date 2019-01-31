@@ -3,8 +3,8 @@
 
 # libFM
 Logger, BeanManager, Utils etc for Android Library (Kotlin)
-- [Contains the FMCheckPermission repository](https://github.com/freemmer/FMCheckPermission)
-- [Contains the FMNotification repository](https://github.com/freemmer/FMNotification)
+- [Contains the FMCheckPermission repository](https://github.com/freemmer/FMCheckPermission) v1.2.2
+- [Contains the FMNotification repository](https://github.com/freemmer/FMNotification) v1.0.1
 
 ## Demo ScreenShot
 + Basic log.
