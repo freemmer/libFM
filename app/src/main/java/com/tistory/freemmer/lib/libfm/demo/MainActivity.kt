@@ -7,14 +7,12 @@ import android.widget.Toast
 import com.tistory.freemmer.lib.libfm.logger.FMILog
 import com.tistory.freemmer.lib.libfm.notification.FMINotification
 import com.tistory.freemmer.lib.libfm.notification.FMNotification
-import com.tistory.freemmer.lib.libfm.permission.FMCheckPermission
 import com.tistory.freemmer.lib.libfm.permission.FMCheckPermissionAppCompatActivity
 import com.tistory.freemmer.lib.libfm.platform.FMBeanManager
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : FMCheckPermissionAppCompatActivity(), FMINotification {
 
-    private lateinit var checker: FMCheckPermission
     private val log = FMBeanManager.getClass(FMILog::class.java)
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,18 +38,18 @@ class MainActivity : FMCheckPermissionAppCompatActivity(), FMINotification {
         }
 
         checkPermissionButton.setOnClickListener {
-            checkPermission(
-                arrayOf(
-                    Manifest.permission.READ_PHONE_STATE,
-                    Manifest.permission.READ_CONTACTS,
-                    Manifest.permission.ACCESS_COARSE_LOCATION,
-                    Manifest.permission.ACCESS_FINE_LOCATION,
-                    Manifest.permission.SYSTEM_ALERT_WINDOW)
-                , {
+            checkPermission(arrayOf(
+                Manifest.permission.READ_PHONE_STATE,
+                Manifest.permission.READ_CONTACTS,
+                Manifest.permission.ACCESS_COARSE_LOCATION,
+                Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.SYSTEM_ALERT_WINDOW)
+                , pAllowedFunc = {
                     // All Permissions requested are allowed
                     Snackbar.make(checkPermissionButton
                         , "OK!!", Snackbar.LENGTH_SHORT).show()
-                }, {checkedDoNotAskPermissions, permissions ->
+                }
+                , pDeniedFunc = { checkedDoNotAskPermissions, permissions ->
                     // Requested Permission denied
                     if (checkedDoNotAskPermissions.isNotEmpty()) {
                         Snackbar.make(checkPermissionButton
