@@ -98,6 +98,9 @@ class FMDeviceUtil private constructor(
         return context.packageManager.getLaunchIntentForPackage(getPackageName()) as Intent
     }
 
+    /**
+     * @param resourceType  'drawable' etc
+     */
     fun getResourceID(variableName:String, resourceType: String): Int {
         return context.resources.getIdentifier(variableName, resourceType, getPackageName())
     }
