@@ -8,14 +8,14 @@ import com.tistory.freemmer.lib.libfm.logger.impl.FMLogCatImpl
  * History
  *    - 22/01/2019 Create file
  */
-object libFM {
+object LibFM {
     var log: FMILog? = null
 
-    fun initialize(): libFM {
+    fun initialize(): LibFM {
         return this
     }
 
-    fun enableDebugLog(): libFM {
+    fun enableDebugLog(): LibFM {
         log = FMLogCatImpl.initialize(FMILog.LEVEL.DEBUG, BuildConfig.APPLICATION_ID, null)
         return this
     }

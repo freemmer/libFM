@@ -1,7 +1,7 @@
 package com.tistory.freemmer.lib.libfm.demo
 
 import android.app.Application
-import com.tistory.freemmer.lib.libfm.libFM
+import com.tistory.freemmer.lib.libfm.LibFM
 import com.tistory.freemmer.lib.libfm.logger.FMILog
 import com.tistory.freemmer.lib.libfm.logger.impl.FMLogCatImpl
 import com.tistory.freemmer.lib.libfm.notification.FMNotification
@@ -26,7 +26,7 @@ class AndroidApplication : Application() {
         //FMNotification.instance(this).createChannel("default_channel_id", "Default Channel")
 
         if (BuildConfig.DEBUG) {
-            libFM.initialize().enableDebugLog()
+            LibFM.initialize().enableDebugLog()
             FMBeanManager.registerClass(FMILog::class.java, FMLogCatImpl.initialize(FMILog.LEVEL.DEBUG
                 , this.resources.getString(R.string.app_name), null))
             val log: FMILog? = FMBeanManager.getClass(FMILog::class.java)

@@ -1,8 +1,8 @@
 package com.tistory.freemmer.lib.libfm.notification
 
-import android.util.Log
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
+import com.tistory.freemmer.lib.libfm.LibFM
 
 /**
  * Created by freemmer on 29/01/2019.
@@ -11,9 +11,7 @@ import com.google.firebase.messaging.RemoteMessage
  */
 class FMFirebaseMessagingService : FirebaseMessagingService() {
 
-    companion object {
-        private const val TAG = "MyFirebaseMsgService"
-    }
+    private val log = LibFM.log
 
     override fun onMessageReceived(remoteMessage: RemoteMessage?) {
         // [START_EXCLUDE]
@@ -28,7 +26,7 @@ class FMFirebaseMessagingService : FirebaseMessagingService() {
 
         // Check if message contains a notification payload.
         remoteMessage?.notification?.let {
-            Log.d(TAG, "Message Notification Body: ${it.body}")
+            log?.d("Message Notification Body: ${it.body}")
             FMNotification.instance(this).sendNotification((0..1000000).random(), it.title, it.body
                 , remoteMessage.toIntent()?.extras)
             return
@@ -36,7 +34,7 @@ class FMFirebaseMessagingService : FirebaseMessagingService() {
 
         // Check if message contains a data payload.
         remoteMessage?.data?.isNotEmpty()?.let {
-            Log.d(TAG, "Message data payload: " + remoteMessage.data)
+            log?.d("Message data payload: " + remoteMessage.data)
             var title = "Undefined Title"
             var body = "Undefined Body"
             FMNotification.PAYLOAD_TITLE_KEY?.let { key ->
@@ -53,7 +51,7 @@ class FMFirebaseMessagingService : FirebaseMessagingService() {
 
 
     override fun onNewToken(token: String?) {
-        Log.d(TAG, "Refreshed token: $token")
+        log?.d("Refreshed token: $token")
     }
 
 }
