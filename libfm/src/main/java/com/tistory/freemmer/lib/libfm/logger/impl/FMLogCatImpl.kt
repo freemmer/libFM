@@ -42,7 +42,11 @@ class FMLogCatImpl private constructor(
 
         val argsCopy = arrayOfNulls<Any>(args.size - 1)
         System.arraycopy(args, 1, argsCopy, 0, argsCopy.size)
-        val strMsg: String = String.format(args[0] as String, *argsCopy)
+        val strMsg = try {
+            String.format(args[0] as String, *argsCopy)
+        } catch (e: Exception) {
+            args[0] as String
+        }
         when (logLevel) {
             FMILog.LEVEL.VERBOSE    -> Log.v(tagName, strMsg)
             FMILog.LEVEL.DEBUG      -> Log.d(tagName, strMsg)
