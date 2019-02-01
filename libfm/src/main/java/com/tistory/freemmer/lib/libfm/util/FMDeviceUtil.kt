@@ -1,32 +1,27 @@
 package com.tistory.freemmer.lib.libfm.util
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
+import android.content.res.Configuration
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
+import android.content.Context.POWER_SERVICE
 import android.os.Build
 import android.os.Bundle
 import android.os.PowerManager
-import java.lang.ref.WeakReference
-import android.content.Context.POWER_SERVICE
-import android.support.v4.content.ContextCompat.getSystemService
 import android.os.Build.VERSION_CODES
 import android.os.Build.VERSION
+import java.lang.ref.WeakReference
 import android.view.Display
-import android.content.Context.POWER_SERVICE
-import android.support.v4.content.ContextCompat.getSystemService
 import android.hardware.display.DisplayManager
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
-import android.net.NetworkInfo
-import android.support.v4.content.ContextCompat.getSystemService
-
-
-
-
-
-
+import android.support.annotation.IntRange
+import android.provider.Settings
+import android.support.v4.app.ActivityCompat
+import android.telephony.TelephonyManager
 
 
 /**
@@ -36,7 +31,8 @@ import android.support.v4.content.ContextCompat.getSystemService
  */
 class FMDeviceUtil private constructor(
     private val context: Context
-){
+) {
+
     companion object {
         private var weakReference: WeakReference<FMDeviceUtil>? = null
 
@@ -52,57 +48,30 @@ class FMDeviceUtil private constructor(
         return Build.VERSION.RELEASE
     }
 
-    fun isScreenOn() : Boolean {
-        val dm = context.getSystemService(Context.DISPLAY_SERVICE) as DisplayManager
-        if (VERSION.SDK_INT >= VERSION_CODES.KITKAT_WATCH) {
-            for (display in dm.displays) {
-                if (display.state != Display.STATE_OFF) {
-                    return true
-                }
-            }
-            return false
-        } else {
-            val powerManager = context.getSystemService(POWER_SERVICE) as PowerManager?
-            if (powerManager!!.isScreenOn) {
-                return true
-            }
-            return false
-        }
+    fun getManufacture(): String {
+        return Build.MANUFACTURER
     }
 
-    @SuppressLint("MissingPermission")
-    fun isWiFiConnected(context: Context): Boolean {
-        val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        return if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
-            val network = connectivityManager.activeNetwork
-            val capabilities = connectivityManager.getNetworkCapabilities(network)
-            capabilities != null && (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI))
-        } else {
-            connectivityManager.activeNetworkInfo.type == ConnectivityManager.TYPE_WIFI
-        }
+    fun getBrand(): String {
+        return Build.BRAND
     }
 
-    @SuppressLint("MissingPermission")
-    fun isOnline() {
-        val cm = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        val activeNetwork = cm.activeNetworkInfo
-        if (activeNetwork != null) {
-            // connected to the internet
-            when (activeNetwork.type) {
-                ConnectivityManager.TYPE_WIFI -> {
-                }
-                ConnectivityManager.TYPE_MOBILE -> {
-                }
-                else -> {
-                }
-            }// connected to wifi
-            // connected to mobile data
-        } else {
-            // not connected to the internet
-        }
+    fun getPhoneOsVersion(): String {
+        return Build.VERSION.RELEASE
     }
 
+    fun getProductName(): String {
+        return Build.PRODUCT
+    }
 
+    fun getModelName(): String {
+        return Build.MODEL
+    }
+
+    @SuppressLint("HardwareIds")
+    fun getUDID(context: Context): String {
+        return Settings.Secure.getString(context.contentResolver, Settings.Secure.ANDROID_ID)
+    }
 
     fun getPackageName(): String {
         return context.applicationContext.packageName
@@ -110,6 +79,10 @@ class FMDeviceUtil private constructor(
 
     fun getApplicationInfo(): ApplicationInfo {
         return context.applicationContext.applicationInfo
+    }
+
+    fun getAppVersion(context: Context): String {
+        return context.packageManager.getPackageInfo(context.packageName, 0).versionName
     }
 
     fun getAppLabel() : String {
@@ -125,9 +98,79 @@ class FMDeviceUtil private constructor(
         return context.packageManager.getLaunchIntentForPackage(getPackageName()) as Intent
     }
 
+    /**
+     * @param resourceType  'drawable' etc
+     */
     fun getResourceID(variableName:String, resourceType: String): Int {
         return context.resources.getIdentifier(variableName, resourceType, getPackageName())
     }
+
+    @SuppressLint("HardwareIds")
+    fun getPhoneNum(): String? {
+        val telephonyManager = context.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
+        var strPhoneNO: String? = null
+        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED) {
+            strPhoneNO = telephonyManager.line1Number
+        }
+        return strPhoneNO
+    }
+
+    fun isTabletDevice(ctx: Context): Boolean {
+        val conf = ctx.resources.configuration
+        val screenSize = conf.screenLayout and Configuration.SCREENLAYOUT_SIZE_MASK
+        return screenSize > Configuration.SCREENLAYOUT_SIZE_LARGE
+    }
+
+    fun isScreenOn() : Boolean {
+        val dm = context.getSystemService(Context.DISPLAY_SERVICE) as DisplayManager
+        if (VERSION.SDK_INT >= VERSION_CODES.KITKAT_WATCH) {
+            for (display in dm.displays) {
+                if (display.state != Display.STATE_OFF) return true
+            }
+            return false
+        } else {
+            val powerManager = context.getSystemService(POWER_SERVICE) as PowerManager?
+            if (powerManager!!.isScreenOn) return true
+            return false
+        }
+    }
+
+    fun isNetworkAvailable(context: Context): Boolean {
+        val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val activeNetwork = connectivityManager.activeNetworkInfo
+        return activeNetwork != null && activeNetwork.isConnected
+    }
+
+    @IntRange(from = 0, to = 2)
+    fun getNetworkConnectionType(context: Context): Int {
+        var result = 0 // Returns connection type. 0: none; 1: mobile data; 2: wifi
+        val cm = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager?
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            cm?.run {
+                cm.getNetworkCapabilities(cm.activeNetwork)?.run {
+                    if (hasTransport(NetworkCapabilities.TRANSPORT_WIFI)) {
+                        result = 2
+                    } else if (hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR)) {
+                        result = 1
+                    }
+                }
+            }
+        } else {
+            cm?.run {
+                cm.activeNetworkInfo?.run {
+                    if (type == ConnectivityManager.TYPE_WIFI) {
+                        result = 2
+                    } else if (type == ConnectivityManager.TYPE_MOBILE) {
+                        result = 1
+                    }
+                }
+            }
+        }
+        return result
+    }
+
+
+
 
 }
 
