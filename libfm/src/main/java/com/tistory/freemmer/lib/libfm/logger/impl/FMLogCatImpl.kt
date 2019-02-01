@@ -120,7 +120,7 @@ class FMLogCatImpl private constructor(
     override fun printArray(logLevel: FMILog.LEVEL, title: String, container: Array<Any>) {
         printDetail(FMILog.LEVEL.DEBUG, "╓─ $title ────────────────────────────────────────────────────")
         for (obj in container) {
-            printDetail(FMILog.LEVEL.DEBUG, "║ " + obj.toString())
+            printDetail(FMILog.LEVEL.DEBUG, "║ $obj")
         }
         var sAddLine = ""
         for (i in 0 until title.length + 2) {

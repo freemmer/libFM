@@ -14,7 +14,7 @@ interface FMILog {
         val STRACK_TRACE_POS = 4
     }
 
-    enum class LEVEL private constructor(code: Int, internal var sName: String) {
+    enum class LEVEL (code: Int, internal var sName: String) {
         OFF     (100, "LOG OFF"),
         VERBOSE (1, "VERBOSE"),
         DEBUG   (2, "DEBUG"),
