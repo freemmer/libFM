@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="dialogBackground">#CC000000</color>
+
+    <!--
+Card 5
+https://dribbble.com/shots/3080932-Card-5
+-->
+    <color name="cardWhite">#f5f8fc</color>
+    <color name="cardWhiteDark">#f7f7f7</color> <!--#dce7f8-->
+    <color name="cardDarkBlue">#08306e</color>
+    <color name="cardRed">#D8B5AA</color>
+    <color name="cardWhiteBlue">#8297B6</color> <!--#97AAD4-->
+    <color name="cardMiddleBlue">#7C89A6</color>
+    <color name="cardCircle">#8094F6</color>
+
+
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="transparent">#00000000</color>
+
+
+
+    <color name="style_color_primary">#2d5d82</color>
+    <color name="style_color_primary_dark">#21425d</color>
+    <color name="style_color_accent">#01bcd5</color>
+
+    <color name="fab_color_pressed">#007787</color>
+    <color name="fab_color_shadow">#44000000</color>
+
+    <color name="btn_default_light_normal">#00000000</color>
+    <color name="btn_default_light_pressed">#40ffffff</color>
+    <color name="btn_send_normal">#02c754</color>
+    <color name="btn_send_pressed">#006633</color>
+    <color name="btn_default_shadow">#99000000</color>
+    <color name="btn_context_menu_normal">#ffffff</color>
+    <color name="btn_context_menu_pressed">#40000000</color>
+    <color name="btn_context_menu_text_red">#ffff0000</color>
+
+    <color name="text_like_counter">#2b5a83</color>
+
+    <color name="bg_comments">#ffffff</color>
+</resources>

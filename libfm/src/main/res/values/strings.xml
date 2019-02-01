@@ -2,4 +2,8 @@
     <string name="app_name">libFM</string>
     <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
     <string name="default_notification_channel_name" translatable="true">Default Channel</string>
+
+    <!--<string name="dialog_btn_ok_caption" translatable="false">OK</string>-->
+    <!--<string name="dialog_btn_cancel_caption" translatable="false">CANCEL</string>-->
+
 </resources>

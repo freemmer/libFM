@@ -1,6 +1,7 @@
 package com.tistory.freemmer.lib.libfm.demo
 
 import android.Manifest
+import android.content.DialogInterface
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.widget.Toast
@@ -9,6 +10,7 @@ import com.tistory.freemmer.lib.libfm.notification.FMINotification
 import com.tistory.freemmer.lib.libfm.notification.FMNotification
 import com.tistory.freemmer.lib.libfm.permission.FMCheckPermissionAppCompatActivity
 import com.tistory.freemmer.lib.libfm.platform.FMBeanManager
+import com.tistory.freemmer.lib.libfm.widget.FMAlertDialog
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : FMCheckPermissionAppCompatActivity(), FMINotification {
@@ -63,7 +65,24 @@ class MainActivity : FMCheckPermissionAppCompatActivity(), FMINotification {
                 })
         }
 
+        showAlertButton.setOnClickListener {
+            FMAlertDialog.build(this, "title", "message") {
+                pOkButton = {
+                    Snackbar.make(showAlertButton
+                            , "Clicked OK!", Snackbar.LENGTH_SHORT).show()
+                    it.dismiss()
+                }
+                pCancelButton = {
+                    Snackbar.make(showAlertButton
+                            , "Clicked CANCEL!", Snackbar.LENGTH_SHORT).show()
+                    it.dismiss()
+                }
+            }.show()
+        }
+
+
     }
+
 
 
 
