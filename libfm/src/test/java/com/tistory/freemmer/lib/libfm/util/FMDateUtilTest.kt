@@ -25,6 +25,13 @@ class FMDateUtilTest {
     }
 
     @Test
+    fun basicCheck_Today_날짜_포맷_변경() {
+        val date = FMDateUtil("yyyy-MM-dd HH:mm:ss")
+        println("Current date is : ${date.toString()}")
+        println("Current date is : ${date.toString("ddMM,yyyy HH:mm:ss")}")
+    }
+
+    @Test
     fun basicCheck_Today_오늘_날짜_기준() {
         val date = FMDateUtil("yyyy-MM-dd HH:mm:ss")
         val today = date.toString()

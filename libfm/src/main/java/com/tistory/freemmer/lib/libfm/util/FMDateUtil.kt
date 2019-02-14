@@ -33,6 +33,11 @@ class FMDateUtil constructor(
         return format.format(Date(calendar.timeInMillis))
     }
 
+    @SuppressLint("SimpleDateFormat")
+    fun toString(dateFormat: String): String {
+        return SimpleDateFormat(dateFormat).format(Date(calendar.timeInMillis))
+    }
+
     fun toTimeInMillis(): Long {
         return calendar.timeInMillis
     }
