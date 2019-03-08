@@ -5,8 +5,7 @@ import org.junit.Before
 import org.junit.Test
 
 import org.junit.Assert.*
-import java.text.SimpleDateFormat
-import java.util.*
+
 
 /**
  * Created by freemmer on 14/02/2019.
@@ -26,9 +25,13 @@ class FMDateUtilTest {
 
     @Test
     fun basicCheck_Today_날짜_포맷_변경() {
-        val date = FMDateUtil("yyyy-MM-dd HH:mm:ss")
-        println("Current date is : ${date.toString()}")
-        println("Current date is : ${date.toString("ddMM,yyyy HH:mm:ss")}")
+        val dateBaseToday = FMDateUtil("yyyy-MM-dd HH:mm:ss")
+        println("Current date is : ${dateBaseToday.toString()}")
+        println("Current date is : ${dateBaseToday.toString("ddMM,yyyy HH:mm:ss")}")
+
+        val dateBaseCustomTime = FMDateUtil("yyyy-MM-dd HH:mm:ss", "1979-06-25 01:02:03")
+        println("Current date is : ${dateBaseCustomTime.toString()}")
+        println("Current date is : ${dateBaseCustomTime.toString("ddMM,yyyy HH:mm:ss")}")
     }
 
     @Test
