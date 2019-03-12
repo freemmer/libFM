@@ -69,7 +69,7 @@ class FMDeviceUtil private constructor(
     }
 
     @SuppressLint("HardwareIds")
-    fun getUDID(context: Context): String {
+    fun getUDID(): String {
         return Settings.Secure.getString(context.contentResolver, Settings.Secure.ANDROID_ID)
     }
 
@@ -81,7 +81,7 @@ class FMDeviceUtil private constructor(
         return context.applicationContext.applicationInfo
     }
 
-    fun getAppVersion(context: Context): String {
+    fun getAppVersion(): String {
         return context.packageManager.getPackageInfo(context.packageName, 0).versionName
     }
 
@@ -115,8 +115,8 @@ class FMDeviceUtil private constructor(
         return strPhoneNO
     }
 
-    fun isTabletDevice(ctx: Context): Boolean {
-        val conf = ctx.resources.configuration
+    fun isTabletDevice(): Boolean {
+        val conf = context.resources.configuration
         val screenSize = conf.screenLayout and Configuration.SCREENLAYOUT_SIZE_MASK
         return screenSize > Configuration.SCREENLAYOUT_SIZE_LARGE
     }
@@ -135,14 +135,14 @@ class FMDeviceUtil private constructor(
         }
     }
 
-    fun isNetworkAvailable(context: Context): Boolean {
+    fun isNetworkAvailable(): Boolean {
         val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val activeNetwork = connectivityManager.activeNetworkInfo
         return activeNetwork != null && activeNetwork.isConnected
     }
 
     @IntRange(from = 0, to = 2)
-    fun getNetworkConnectionType(context: Context): Int {
+    fun getNetworkConnectionType(): Int {
         var result = 0 // Returns connection type. 0: none; 1: mobile data; 2: wifi
         val cm = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager?
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
