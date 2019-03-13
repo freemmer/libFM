@@ -27,8 +27,8 @@ class AndroidApplication : Application() {
 
         if (BuildConfig.DEBUG) {
             LibFM.initialize().enableDebugLog()
-            FMBeanManager.registerClass(FMILog::class.java, FMLogCatImpl.initialize(FMILog.LEVEL.DEBUG
-                , this.resources.getString(R.string.app_name), null))
+            FMBeanManager.registerClass(FMILog::class.java, FMLogCatImpl
+                .build(FMILog.LEVEL.DEBUG, this.resources.getString(R.string.app_name), null))
             val log: FMILog? = FMBeanManager.getClass(FMILog::class.java)
             log?.printDeviceInfo(this)
             log?.printMemory()

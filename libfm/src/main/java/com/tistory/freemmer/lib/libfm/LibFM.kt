@@ -16,7 +16,7 @@ object LibFM {
     }
 
     fun enableDebugLog(): LibFM {
-        log = FMLogCatImpl.initialize(FMILog.LEVEL.DEBUG, BuildConfig.APPLICATION_ID, null)
+        log = FMLogCatImpl.build(FMILog.LEVEL.DEBUG, BuildConfig.APPLICATION_ID, null)
         return this
     }
 }

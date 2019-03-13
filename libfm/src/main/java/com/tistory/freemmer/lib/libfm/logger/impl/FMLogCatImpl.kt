@@ -20,16 +20,29 @@ class FMLogCatImpl private constructor(
 ) : FMILog {
 
     companion object {
-        private var thiz: FMLogCatImpl = FMLogCatImpl()
-        fun initialize(printLogLevel: FMILog.LEVEL, tagName: String, dest: FMILogDestination?): FMLogCatImpl {
-            thiz.setPrintInfo(printLogLevel, tagName, dest)
-            return thiz
-        }
+        fun build(printLogLevel: FMILog.LEVEL, tagName: String, dest: FMILogDestination?): FMLogCatImpl
+                = FMLogCatImpl.Builder(printLogLevel, tagName, dest).build()
     }
 
     private lateinit var tagName: String
     private lateinit var printLevel: FMILog.LEVEL
     private var logDestination: FMILogDestination? = null
+
+    class Builder(private val printLogLevel: FMILog.LEVEL
+                  , private val tagName: String
+                  , private val dest: FMILogDestination?
+    ) {
+        fun build(): FMLogCatImpl {
+            val logImple = FMLogCatImpl()
+            logImple.setPrintInfo(printLogLevel, tagName, dest)
+            return logImple
+        }
+
+        companion object {
+            fun build(printLogLevel: FMILog.LEVEL, tagName: String, dest: FMILogDestination?, init: Builder.() -> Unit)
+                    = Builder(printLogLevel, tagName, dest).build()
+        }
+    }
 
     override fun setPrintInfo(printLogLevel: FMILog.LEVEL, tagName: String, dest: FMILogDestination?) {
         this.tagName = tagName
