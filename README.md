@@ -28,7 +28,7 @@ allprojects {
 App build.gradle
 ```Groovy
 dependencies {
-    implementation 'com.github.freemmer:libFM:1.2.6'
+    implementation 'com.github.freemmer:libFM:1.2.7'
 }
 ```
 
