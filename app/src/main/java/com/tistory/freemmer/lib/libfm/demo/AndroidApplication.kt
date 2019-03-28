@@ -3,9 +3,8 @@ package com.tistory.freemmer.lib.libfm.demo
 import android.app.Application
 import com.tistory.freemmer.lib.libfm.LibFM
 import com.tistory.freemmer.lib.libfm.logger.FMILog
-import com.tistory.freemmer.lib.libfm.logger.impl.FMLogCatImpl
+import com.tistory.freemmer.lib.libfm.logger.FMLog
 import com.tistory.freemmer.lib.libfm.notification.FMNotification
-import com.tistory.freemmer.lib.libfm.platform.FMBeanManager
 
 /**
  * Created by freemmer on 22/01/2019.
@@ -27,11 +26,14 @@ class AndroidApplication : Application() {
 
         if (BuildConfig.DEBUG) {
             LibFM.initialize().enableDebugLog()
-            FMBeanManager.registerClass(FMILog::class.java, FMLogCatImpl
+            /*FMBeanManager.registerClass(FMILog::class.java, FMLogCatImpl
                 .build(FMILog.LEVEL.DEBUG, this.resources.getString(R.string.app_name), null))
             val log: FMILog? = FMBeanManager.getClass(FMILog::class.java)
             log?.printDeviceInfo(this)
-            log?.printMemory()
+            log?.printMemory()*/
+            FMLog.initialze(FMILog.LEVEL.DEBUG, this.resources.getString(R.string.app_name))
+            FMLog.printDeviceInfo(this)
+            FMLog.printMemory()
         }
 
     }

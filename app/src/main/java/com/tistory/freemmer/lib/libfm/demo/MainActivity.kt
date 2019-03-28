@@ -1,27 +1,25 @@
 package com.tistory.freemmer.lib.libfm.demo
 
 import android.Manifest
-import android.content.DialogInterface
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.widget.Toast
-import com.tistory.freemmer.lib.libfm.logger.FMILog
+import com.tistory.freemmer.lib.libfm.logger.FMLog
 import com.tistory.freemmer.lib.libfm.notification.FMINotification
 import com.tistory.freemmer.lib.libfm.notification.FMNotification
 import com.tistory.freemmer.lib.libfm.permission.FMCheckPermissionAppCompatActivity
-import com.tistory.freemmer.lib.libfm.platform.FMBeanManager
 import com.tistory.freemmer.lib.libfm.widget.FMAlertDialog
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : FMCheckPermissionAppCompatActivity(), FMINotification {
 
-    private val log = FMBeanManager.getClass(FMILog::class.java)
+    //private val log = FMBeanManager.getClass(FMILog::class.java)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        log?.d("Hello world!")
+        FMLog.d("Hello world!")
 
         // for FMINotification::onClickedNotification
         intent.extras?.let {
@@ -32,7 +30,7 @@ class MainActivity : FMCheckPermissionAppCompatActivity(), FMINotification {
         checkPushTokenButton.setOnClickListener {
             FMNotification.getPushToken { isSuccessful: Boolean, token: String? ->
                 if (!isSuccessful) {
-                    log?.d("getInstanceId failed")
+                    FMLog.d("getInstanceId failed")
                 } else {
                     Toast.makeText(baseContext, "Push Token: $token", Toast.LENGTH_SHORT).show()
                 }
@@ -90,7 +88,7 @@ class MainActivity : FMCheckPermissionAppCompatActivity(), FMINotification {
         // In case a notification message is tapped.
         // Handle possible data accompanying notification message.
         for (key in bundle.keySet()) {
-            log?.d("Key: %s Value: %s", key, bundle.get(key) ?: "empty")
+            FMLog.d("Key: %s Value: %s", key, bundle.get(key) ?: "empty")
         }
     }
 

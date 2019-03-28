@@ -56,10 +56,6 @@ class FMDeviceUtil private constructor(
         return Build.BRAND
     }
 
-    fun getPhoneOsVersion(): String {
-        return Build.VERSION.RELEASE
-    }
-
     fun getProductName(): String {
         return Build.PRODUCT
     }

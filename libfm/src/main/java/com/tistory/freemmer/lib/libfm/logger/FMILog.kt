@@ -9,10 +9,10 @@ import android.content.Context
  */
 interface FMILog {
 
-    companion object {
-        // Thread, Class, Function정보를 가지고 있는 Stack Trace의 위치.
-        val STRACK_TRACE_POS = 4
-    }
+//    companion object {
+//        // Thread, Class, Function정보를 가지고 있는 Stack Trace의 위치.
+//        val STRACK_TRACE_POS = 4
+//    }
 
     enum class LEVEL (code: Int, internal var sName: String) {
         OFF     (100, "LOG OFF"),

@@ -24,6 +24,9 @@ class FMLogCatImpl private constructor(
                 = FMLogCatImpl.Builder(printLogLevel, tagName, dest).build()
     }
 
+    // Thread, Class, Function정보를 가지고 있는 Stack Trace의 위치.
+    private val STRACK_TRACE_POS = 4
+
     private lateinit var tagName: String
     private lateinit var printLevel: FMILog.LEVEL
     private var logDestination: FMILogDestination? = null
@@ -74,9 +77,9 @@ class FMLogCatImpl private constructor(
     private fun printDetail(logLevel: FMILog.LEVEL, vararg args: Any) {
         val thread: Thread = Thread.currentThread()
         val strLog: String = String.format("[(%s:%d):%s() on %s] %s"
-            , thread.stackTrace[FMILog.STRACK_TRACE_POS].fileName
-            , thread.stackTrace[FMILog.STRACK_TRACE_POS].lineNumber
-            , thread.stackTrace[FMILog.STRACK_TRACE_POS].methodName
+            , thread.stackTrace[STRACK_TRACE_POS].fileName
+            , thread.stackTrace[STRACK_TRACE_POS].lineNumber
+            , thread.stackTrace[STRACK_TRACE_POS].methodName
             , thread.name
             , args[0])
         val argsCopy = arrayOfNulls<Any>(args.size)
