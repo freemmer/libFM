@@ -96,17 +96,17 @@ class FMLogCatImpl private constructor(
     }
 
     override fun v(vararg args: Any) = printDetail(FMILog.LEVEL.VERBOSE, *args)
-    override fun v(info: String, vararg args: Any) = printDetail(FMILog.LEVEL.VERBOSE, info, *args)
+    override fun vTag(info: String, vararg args: Any) = printDetail(FMILog.LEVEL.VERBOSE, info, *args)
     override fun d(vararg args: Any) = printDetail(FMILog.LEVEL.DEBUG, *args)
-    override fun d(info: String, vararg args: Any) = printDetail(FMILog.LEVEL.DEBUG, info, *args)
+    override fun dTag(info: String, vararg args: Any) = printDetail(FMILog.LEVEL.DEBUG, info, *args)
     override fun i(vararg args: Any) = printDetail(FMILog.LEVEL.INFO, *args)
-    override fun i(info: String, vararg args: Any) = printDetail(FMILog.LEVEL.INFO, info, *args)
+    override fun iTag(info: String, vararg args: Any) = printDetail(FMILog.LEVEL.INFO, info, *args)
     override fun w(vararg args: Any) = printDetail(FMILog.LEVEL.WARN, *args)
-    override fun w(info: String, vararg args: Any) = printDetail(FMILog.LEVEL.WARN, info, *args)
+    override fun wTag(info: String, vararg args: Any) = printDetail(FMILog.LEVEL.WARN, info, *args)
     override fun e(vararg args: Any) = printDetail(FMILog.LEVEL.ERROR, *args)
-    override fun e(info: String, vararg args: Any) = printDetail(FMILog.LEVEL.ERROR, info, *args)
+    override fun eTag(info: String, vararg args: Any) = printDetail(FMILog.LEVEL.ERROR, info, *args)
     override fun exception(e: Exception) = printException(e)
-    override fun exception(info: String, e: Exception) = printException(e)
+    override fun exceptionTag(info: String, e: Exception) = printException(e)
 
 
     override fun printDeviceInfo(context: Context) {

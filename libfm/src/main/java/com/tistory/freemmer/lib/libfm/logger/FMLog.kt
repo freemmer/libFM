@@ -19,12 +19,12 @@ class FMLog {
             weakReference = WeakReference(FMLogCatImpl.build(printLogLevel, tagName, null))
         }
 
-        fun v(vararg args: Any) = run { weakReference?.get()?.v(getInfo(), *args) }
-        fun d(vararg args: Any) = run {weakReference?.get()?.d(getInfo(), *args)}
-        fun i(vararg args: Any) = run {weakReference?.get()?.i(getInfo(), *args)}
-        fun w(vararg args: Any) = run {weakReference?.get()?.w(getInfo(), *args)}
-        fun e(vararg args: Any) = run {weakReference?.get()?.e(getInfo(), *args)}
-        fun exception(e: Exception) = run {weakReference?.get()?.exception(getInfo(), e)}
+        fun v(vararg args: Any) = run { weakReference?.get()?.vTag(getInfo(), *args)}
+        fun d(vararg args: Any) = run {weakReference?.get()?.dTag(getInfo(), *args)}
+        fun i(vararg args: Any) = run {weakReference?.get()?.iTag(getInfo(), *args)}
+        fun w(vararg args: Any) = run {weakReference?.get()?.wTag(getInfo(), *args)}
+        fun e(vararg args: Any) = run {weakReference?.get()?.eTag(getInfo(), *args)}
+        fun exception(e: Exception) = run {weakReference?.get()?.exceptionTag(getInfo(), e)}
 
         fun printDeviceInfo(context: Context) = weakReference?.get()?.printDeviceInfo(context)
         fun printMemory() = weakReference?.get()?.printMemory()
