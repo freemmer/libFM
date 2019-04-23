@@ -74,7 +74,7 @@ class FMLogCatImpl private constructor(
     }
 
     private fun printDetail(logLevel: FMILog.LEVEL, info: String, vararg args: Any) {
-        val strLog: String = String.format("[%s] %s", info , args[0])
+        val strLog: String = String.format("%s → %s", info , args[0])
         val argsCopy = arrayOfNulls<Any>(args.size)
         argsCopy[0] = strLog
         System.arraycopy(args, 1, argsCopy, 1, argsCopy.size - 1)
@@ -83,7 +83,7 @@ class FMLogCatImpl private constructor(
 
     private fun printDetail(logLevel: FMILog.LEVEL, vararg args: Any) {
         val thread: Thread = Thread.currentThread()
-        val strLog: String = String.format("[(%s:%d):%s() on %s] %s"
+        val strLog: String = String.format("(%s:%d):%s() on %s → %s"
             , thread.stackTrace[STRACK_TRACE_POS].fileName
             , thread.stackTrace[STRACK_TRACE_POS].lineNumber
             , thread.stackTrace[STRACK_TRACE_POS].methodName
