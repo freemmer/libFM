@@ -4,10 +4,6 @@ pipeline {
     stage('assembleDebug') {
       steps {
         sh './gradlew assembleDebug --stacktrace'
-      }
-    }
-    stage('google-services.json') {
-      steps {
         sh 'echo $GOOGLE_SERVICES_JSON | base64 --decode --ignore-garbage > /app/google-services.json'
       }
     }
