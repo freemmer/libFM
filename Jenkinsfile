@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('Touch google-services.json') {
       steps {
-        sh 'echo $GOOGLE_SERVICES_JSON | base64 --decode --ignore-garbage > /app/google-services.json'
+        sh 'echo $GOOGLE_SERVICES_JSON | base64 --decode --ignore-garbage > /var/jenkins_home/workspace/libFM_master/app/google-services.json'
       }
     }
     stage('assembleDebug') {
