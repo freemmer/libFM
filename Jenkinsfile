@@ -1,9 +1,14 @@
 pipeline {
   agent any
   stages {
+    stage('Touch google-services.json') {
+      steps {
+        sh 'echo $GOOGLE_SERVICES_JSON | base64 --decode --ignore-garbage > /app/google-services.json'
+      }
+    }
     stage('assembleDebug') {
       steps {
-        sh 'echo $GOOGLE_SERVICES_JSON'
+        sh './gradlew assembleDebug --stacktrace'
       }
     }
   }
