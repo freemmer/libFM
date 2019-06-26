@@ -18,10 +18,11 @@ import android.view.Display
 import android.hardware.display.DisplayManager
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
-import android.support.annotation.IntRange
+//import android.support.annotation.IntRange
 import android.provider.Settings
-import android.support.v4.app.ActivityCompat
+//import android.support.v4.app.ActivityCompat
 import android.telephony.TelephonyManager
+import androidx.core.app.ActivityCompat
 
 
 /**
@@ -137,7 +138,7 @@ class FMDeviceUtil private constructor(
         return activeNetwork != null && activeNetwork.isConnected
     }
 
-    @IntRange(from = 0, to = 2)
+    //@IntRange(from = 0, to = 2)
     fun getNetworkConnectionType(): Int {
         var result = 0 // Returns connection type. 0: none; 1: mobile data; 2: wifi
         val cm = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager?

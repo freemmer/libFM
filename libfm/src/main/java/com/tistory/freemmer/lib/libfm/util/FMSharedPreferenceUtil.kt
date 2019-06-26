@@ -63,12 +63,12 @@ class FMSharedPreferenceUtil private constructor(
 
     fun getIntSharedPreference(key: String): Int {
         val prefs = PreferenceManager.getDefaultSharedPreferences(context)
-        return prefs.getInt(key, -1)
+        return prefs.getInt(key, 0)
     }
 
     fun getFloatSharedPreference(key: String): Float {
         val prefs = PreferenceManager.getDefaultSharedPreferences(context)
-        return prefs.getFloat(key, -1f)
+        return prefs.getFloat(key, 0f)
     }
 
 }

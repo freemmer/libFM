@@ -7,9 +7,12 @@ import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.os.PersistableBundle
-import android.support.v4.app.FragmentActivity
-import android.support.v4.app.NotificationCompat
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.NotificationCompat
+import androidx.fragment.app.FragmentActivity
+//import android.support.v4.app.FragmentActivity
+//import android.support.v4.app.NotificationCompat
+//import android.support.v7.app.AppCompatActivity
 import com.google.firebase.iid.FirebaseInstanceId
 import com.tistory.freemmer.lib.libfm.R
 import com.tistory.freemmer.lib.libfm.util.FMDeviceUtil
@@ -108,7 +111,8 @@ class FMNotification private constructor(
             .setPriority(NotificationCompat.PRIORITY_HIGH)
             .setDefaults(Notification.DEFAULT_ALL)
             .setContentIntent(pendingIntent)
-            .setContentTitle(title.takeIf { title != null } ?: FMDeviceUtil.instance(context).getAppLabel())
+            //.setContentTitle(title.takeIf { title != null } ?: FMDeviceUtil.instance(context).getAppLabel())
+            .setContentTitle( title ?: FMDeviceUtil.instance(context).getAppLabel())
         body?.let { notificationBuilder.setContentText(it) }
 
         val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager

@@ -8,12 +8,18 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.provider.Settings
-import android.support.v4.app.ActivityCompat
-import android.support.v4.app.FragmentActivity
-import android.support.v4.content.ContextCompat
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
+import androidx.fragment.app.FragmentActivity
+//import android.support.v4.app.ActivityCompat
+//import android.support.v4.app.FragmentActivity
+//import android.support.v4.content.ContextCompat
+//import android.support.v7.app.AppCompatActivity
 import java.lang.ref.WeakReference
-import kotlin.collections.ArrayList
+import java.util.*
+
+//import kotlin.collections.ArrayList
 
 /**
  * Created by freemmer on 11/01/2019.
@@ -90,9 +96,13 @@ class FMCheckPermission private constructor(
 
     fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
         if (requestCode != REQUEST_PERMISSIONS_CHECK) return
-
         val deniedPermissionsList = ArrayList<String>()      // 완전 거부한 퍼미션 (Checked 'Don't ask')
         val rationaleDeniedPermissions = ArrayList<String>() // 거부한 퍼미션 (일반)
+
+        if (grantResults.isEmpty()) {
+            pDeniedFunc.invoke(rationaleDeniedPermissions.toTypedArray(), deniedPermissionsList.toTypedArray())
+            return
+        }
         for (i in permissions.indices) {
             if (grantResults[i] != PackageManager.PERMISSION_GRANTED) {
                 if (ActivityCompat.shouldShowRequestPermissionRationale(activity, permissions[i])) {
