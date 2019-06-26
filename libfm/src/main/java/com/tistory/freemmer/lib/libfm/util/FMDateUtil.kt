@@ -1,8 +1,9 @@
 package com.tistory.freemmer.lib.libfm.util
 
 import android.annotation.SuppressLint
-import android.support.annotation.IntDef
-import android.support.annotation.IntRange
+import androidx.annotation.IntDef
+//import android.support.annotation.IntDef
+//import android.support.annotation.IntRange
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -70,7 +71,7 @@ class FMDateUtil constructor(
         return calendar.getActualMaximum(Calendar.DAY_OF_MONTH)
     }
 
-    @IntRange(from = -12, to = 12)
+    //@IntRange(from = -12, to = 12)
     fun getTimeZoneOffSet(): Int {
         return (calendar.get(Calendar.ZONE_OFFSET) / (60*60*1000))
     }

@@ -73,10 +73,17 @@ class FMLogCatImpl private constructor(
         }
     }
 
+    private fun printDetail(logLevel: FMILog.LEVEL, info: String, vararg args: Any) {
+        val strLog: String = String.format("%s → %s", info , args[0])
+        val argsCopy = arrayOfNulls<Any>(args.size)
+        argsCopy[0] = strLog
+        System.arraycopy(args, 1, argsCopy, 1, argsCopy.size - 1)
+        print(logLevel, *argsCopy)
+    }
 
     private fun printDetail(logLevel: FMILog.LEVEL, vararg args: Any) {
         val thread: Thread = Thread.currentThread()
-        val strLog: String = String.format("[(%s:%d):%s() on %s] %s"
+        val strLog: String = String.format("(%s:%d):%s() on %s → %s"
             , thread.stackTrace[STRACK_TRACE_POS].fileName
             , thread.stackTrace[STRACK_TRACE_POS].lineNumber
             , thread.stackTrace[STRACK_TRACE_POS].methodName
@@ -89,11 +96,18 @@ class FMLogCatImpl private constructor(
     }
 
     override fun v(vararg args: Any) = printDetail(FMILog.LEVEL.VERBOSE, *args)
+    override fun vTag(info: String, vararg args: Any) = printDetail(FMILog.LEVEL.VERBOSE, info, *args)
     override fun d(vararg args: Any) = printDetail(FMILog.LEVEL.DEBUG, *args)
+    override fun dTag(info: String, vararg args: Any) = printDetail(FMILog.LEVEL.DEBUG, info, *args)
     override fun i(vararg args: Any) = printDetail(FMILog.LEVEL.INFO, *args)
+    override fun iTag(info: String, vararg args: Any) = printDetail(FMILog.LEVEL.INFO, info, *args)
     override fun w(vararg args: Any) = printDetail(FMILog.LEVEL.WARN, *args)
+    override fun wTag(info: String, vararg args: Any) = printDetail(FMILog.LEVEL.WARN, info, *args)
     override fun e(vararg args: Any) = printDetail(FMILog.LEVEL.ERROR, *args)
+    override fun eTag(info: String, vararg args: Any) = printDetail(FMILog.LEVEL.ERROR, info, *args)
     override fun exception(e: Exception) = printException(e)
+    override fun exceptionTag(info: String, e: Exception) = printException(e)
+
 
     override fun printDeviceInfo(context: Context) {
         val density = context.resources.displayMetrics.densityDpi

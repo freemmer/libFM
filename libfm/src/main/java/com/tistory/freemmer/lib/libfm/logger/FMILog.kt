@@ -48,11 +48,17 @@ interface FMILog {
     fun print(logLevel: LEVEL, vararg args: Any?)
 
     fun v(vararg args: Any)
+    fun vTag(info: String, vararg args: Any)
     fun d(vararg args: Any)
+    fun dTag(info: String, vararg args: Any)
     fun i(vararg args: Any)
+    fun iTag(info: String, vararg args: Any)
     fun w(vararg args: Any)
+    fun wTag(info: String, vararg args: Any)
     fun e(vararg args: Any)
+    fun eTag(info: String, vararg args: Any)
     fun exception(e: Exception)
+    fun exceptionTag(info: String, e: Exception)
 
 
     fun printDeviceInfo(context: Context)
