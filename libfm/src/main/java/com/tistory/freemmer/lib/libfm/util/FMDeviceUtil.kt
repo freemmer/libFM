@@ -112,6 +112,19 @@ class FMDeviceUtil private constructor(
         return strPhoneNO
     }
 
+    fun getPhoneIMEI(): String? {
+        val telephonyManager = context.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
+        var strPhoneIMEI: String? = null
+        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED) {
+            if (VERSION.SDK_INT >= VERSION_CODES.O) {
+                strPhoneIMEI = telephonyManager.imei
+            } else {
+                strPhoneIMEI = telephonyManager.deviceId
+            }
+        }
+        return strPhoneIMEI
+    }
+
     fun isTabletDevice(): Boolean {
         val conf = context.resources.configuration
         val screenSize = conf.screenLayout and Configuration.SCREENLAYOUT_SIZE_MASK
