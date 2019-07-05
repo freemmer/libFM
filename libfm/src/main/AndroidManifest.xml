@@ -4,8 +4,9 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
+    <!--android:allowBackup="false"-->
     <application
-        android:allowBackup="false"
+        android:allowBackup="true"
         android:fullBackupContent="true"
         android:supportsRtl="true" >
 
