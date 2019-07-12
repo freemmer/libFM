@@ -10,9 +10,6 @@ import android.os.PersistableBundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
 import androidx.fragment.app.FragmentActivity
-//import android.support.v4.app.FragmentActivity
-//import android.support.v4.app.NotificationCompat
-//import android.support.v7.app.AppCompatActivity
 import com.google.firebase.iid.FirebaseInstanceId
 import com.tistory.freemmer.lib.libfm.R
 import com.tistory.freemmer.lib.libfm.util.FMDeviceUtil
@@ -33,10 +30,21 @@ class FMNotification private constructor(
         var PAYLOAD_BODY_KEY: String? = null
         private var weakReference: WeakReference<FMNotification>? = null
 
-        fun initialize(context: Context): FMNotification {
+        var HEAD_UP_CHANNEL_ID: String = ""
+        var SILENT_CHANNEL_ID: String = ""
+
+        fun initialize(context: Context
+                       , headUpChannelID: String = context.getString(R.string.default_head_up_notification_channel_id)
+                       , headupChannelName: String = context.getString(R.string.default_head_up_notification_channel_name)
+                       , silentChannelID: String = context.getString(R.string.default_silent_notification_channel_id)
+                       , silentChannelName: String = context.getString(R.string.default_silent_notification_channel_name)
+        ): FMNotification {
+            HEAD_UP_CHANNEL_ID = headUpChannelID
+            SILENT_CHANNEL_ID = silentChannelID
+            instance(context)
+                .createChannel(silentChannelID, silentChannelName, NotificationManager.IMPORTANCE_NONE, false, false)
             return instance(context)
-                .createChannel(context.getString(R.string.default_notification_channel_id)
-                    , context.getString(R.string.default_notification_channel_name))
+                .createChannel(headUpChannelID, headupChannelName)
         }
 
         fun instance(context: Context): FMNotification {
@@ -59,8 +67,9 @@ class FMNotification private constructor(
                       , importance: Int = NotificationManager.IMPORTANCE_HIGH
                       , enableLights: Boolean = true
                       , enableVibration: Boolean = true
+                      , lockScreenVisibility: Int = Notification.VISIBILITY_PUBLIC
                       , lightColor: Int = Color.GRAY
-                      , lockScreenVisibility: Int = Notification.VISIBILITY_PUBLIC): FMNotification
+    ): FMNotification
     {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val channel = NotificationChannel(channelId, channelName, importance)
@@ -73,9 +82,10 @@ class FMNotification private constructor(
         return this
     }
 
+
     fun sendNotification(notificationId: Int, title: String?, body: String?
                          , bundle: Bundle? = null
-                         , channelId: String = context.getString(R.string.default_notification_channel_id)) {
+                         , channelId: String = context.getString(R.string.default_head_up_notification_channel_id)) {
         val targetIntent: Intent = if (TARGET_LAUNCH_CLASS != null) {
             Intent(context, TARGET_LAUNCH_CLASS)
         } else {
@@ -111,7 +121,6 @@ class FMNotification private constructor(
             .setPriority(NotificationCompat.PRIORITY_HIGH)
             .setDefaults(Notification.DEFAULT_ALL)
             .setContentIntent(pendingIntent)
-            //.setContentTitle(title.takeIf { title != null } ?: FMDeviceUtil.instance(context).getAppLabel())
             .setContentTitle( title ?: FMDeviceUtil.instance(context).getAppLabel())
         body?.let { notificationBuilder.setContentText(it) }
 

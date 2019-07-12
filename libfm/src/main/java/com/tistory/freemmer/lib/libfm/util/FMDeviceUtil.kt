@@ -18,6 +18,7 @@ import android.view.Display
 import android.hardware.display.DisplayManager
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
+import android.net.wifi.WifiManager
 //import android.support.annotation.IntRange
 import android.provider.Settings
 //import android.support.v4.app.ActivityCompat
@@ -94,6 +95,15 @@ class FMDeviceUtil private constructor(
     fun getLaunchIntent(): Intent {
         return context.packageManager.getLaunchIntentForPackage(getPackageName()) as Intent
     }
+
+    fun getFirmware(): String {
+        val telephonyManager = context.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
+        return if (ActivityCompat.checkSelfPermission(context, Manifest.permission.READ_PHONE_STATE)
+            !== PackageManager.PERMISSION_GRANTED) {
+            ""
+        } else telephonyManager.deviceSoftwareVersion
+    }
+
 
     /**
      * @param resourceType  'drawable' etc
