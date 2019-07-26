@@ -199,25 +199,25 @@ abstract class FMCheckPermissionAppCompatActivity: AppCompatActivity() {
 }
 
 abstract class FMCheckPermissionAppFragmentActivity: FragmentActivity() {
-    private lateinit var checker: FMCheckPermission
+    private var checker: FMCheckPermission? = null
 
     protected fun checkPermission(permissions: Array<String>
                                   , pAllowedFunc:() -> Unit
                                   , pDeniedFunc:(checkedDoNotAskPermissions: Array<String>, permissions: Array<String>) -> Unit)
     {
         checker = FMCheckPermission.instance(this)
-        checker.check(permissions, pAllowedFunc, pDeniedFunc)
+        checker?.check(permissions, pAllowedFunc, pDeniedFunc)
     }
 
     protected fun movePermissionSetting() {
-        checker.moveSetting()
+        checker?.moveSetting()
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
-        checker.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        checker?.onRequestPermissionsResult(requestCode, permissions, grantResults)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        checker.onActivityResult(requestCode)
+        checker?.onActivityResult(requestCode)
     }
 }

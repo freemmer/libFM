@@ -4,8 +4,9 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
+    <!--android:allowBackup="false"-->
     <application
-        android:allowBackup="false"
+        android:allowBackup="true"
         android:fullBackupContent="true"
         android:supportsRtl="true" >
 
@@ -22,7 +23,7 @@
         <!-- Set default channel id-->
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_channel_id"
-            android:value="@string/default_notification_channel_id" />
+            android:value="@string/default_head_up_notification_channel_id" />
 
         <service
             android:name=".notification.FMJobService"

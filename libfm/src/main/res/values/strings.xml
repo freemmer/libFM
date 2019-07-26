@@ -1,7 +1,9 @@
 <resources>
     <string name="app_name">libFM</string>
-    <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
-    <string name="default_notification_channel_name" translatable="true">Default Channel</string>
+    <string name="default_head_up_notification_channel_id" translatable="false">default_head_up_channel</string>
+    <string name="default_head_up_notification_channel_name" translatable="true">Default Head Up Channel</string>
+    <string name="default_silent_notification_channel_id" translatable="false">default_silent_channel</string>
+    <string name="default_silent_notification_channel_name" translatable="true">Default Silent Channel</string>
 
     <!--<string name="dialog_btn_ok_caption" translatable="false">OK</string>-->
     <!--<string name="dialog_btn_cancel_caption" translatable="false">CANCEL</string>-->

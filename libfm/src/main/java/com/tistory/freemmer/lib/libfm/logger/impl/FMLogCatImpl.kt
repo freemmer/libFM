@@ -148,27 +148,27 @@ class FMLogCatImpl private constructor(
     }
 
     override fun printArray(logLevel: FMILog.LEVEL, title: String, container: Array<Any>) {
-        printDetail(FMILog.LEVEL.DEBUG, "╓─ $title ────────────────────────────────────────────────────")
+        print(FMILog.LEVEL.DEBUG, "╓─$title────────────────────────────────────────────────────")
         for (obj in container) {
-            printDetail(FMILog.LEVEL.DEBUG, "║ $obj")
+            print(FMILog.LEVEL.DEBUG, "║ $obj")
         }
         var sAddLine = ""
         for (i in 0 until title.length + 2) {
             sAddLine += "─"
         }
-        printDetail(FMILog.LEVEL.DEBUG, "╙───────────────────────────────────────────────────── $sAddLine")
+        print(FMILog.LEVEL.DEBUG, "╙─────────────────────────────────────────────────────$sAddLine")
     }
 
     override fun printMap(logLevel: FMILog.LEVEL, title: String, map: Map<String, String>) {
-        printDetail(FMILog.LEVEL.DEBUG, "╓─ $title ────────────────────────────────────────────────────")
+        print(FMILog.LEVEL.DEBUG, "╓─$title────────────────────────────────────────────────────")
         for ((key, value) in map) {
-            printDetail(FMILog.LEVEL.DEBUG, "║ $key : $value")
+            print(FMILog.LEVEL.DEBUG, "║ $key : $value")
         }
         var sAddLine = ""
         for (i in 0 until title.length + 2) {
             sAddLine += "─"
         }
-        printDetail(FMILog.LEVEL.DEBUG, "╙───────────────────────────────────────────────────── $sAddLine")
+        print(FMILog.LEVEL.DEBUG, "╙─────────────────────────────────────────────────────$sAddLine")
     }
 
     override fun printException(e: Exception) {

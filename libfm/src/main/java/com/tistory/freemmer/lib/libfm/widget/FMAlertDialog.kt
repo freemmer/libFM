@@ -18,13 +18,14 @@ class FMAlertDialog constructor(
 ) : Dialog(context) {
 
     companion object {
-        fun build(context: Context, title: String, message: String, init: FMAlertDialog.Builder.() -> Unit): FMAlertDialog
-                = FMAlertDialog.Builder(context, title, message, init).build()
+        fun build(context: Context, title: String, message: String, useBackKey: Boolean = false, init: FMAlertDialog.Builder.() -> Unit): FMAlertDialog
+                = FMAlertDialog.Builder(context, title, message, useBackKey, init).build()
     }
 
     class Builder(private val context: Context
                   , private val title: String
                   , private val message: String
+                  , private val useBackKey: Boolean
                   , init: Builder.() -> Unit
     ) {
         var pOkButton: ((dialog: Dialog)->Unit)? = null
@@ -35,26 +36,28 @@ class FMAlertDialog constructor(
         }
 
         fun build(): FMAlertDialog {
-            val alert = FMAlertDialog(context, title, message)
+            val alert = FMAlertDialog(context, title, message, useBackKey)
             alert.pOkButton = this.pOkButton
             alert.pCancelButton = this.pCancelButton
             return alert
         }
 
         companion object {
-            fun build(context: Context, title: String, desc: String, init: Builder.() -> Unit)
-                    = Builder(context, title, desc, init).build()
+            fun build(context: Context, title: String, desc: String, useBackKey: Boolean, init: Builder.() -> Unit)
+                    = Builder(context, title, desc, useBackKey, init).build()
         }
     }
 
     private lateinit var title: String
     private lateinit var message: String
+    private var useBackKey: Boolean = false
     var pOkButton: ((dialog: Dialog)->Unit)? = null
     var pCancelButton: ((dialog: Dialog)->Unit)? = null
 
-    constructor(context: Context, title: String, message: String) : this(context) {
+    constructor(context: Context, title: String, message: String, useBackKey: Boolean = false) : this(context) {
         this.title = title
         this.message = message
+        this.useBackKey = useBackKey
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -62,6 +65,7 @@ class FMAlertDialog constructor(
         requestWindowFeature(Window.FEATURE_NO_TITLE)
         window?.setBackgroundDrawableResource(R.color.dialogBackground)
         setContentView(R.layout.dialog_alert_layout)
+        setCancelable(useBackKey)
 
         fmAlertTitle.text = title
         fmAlertMessage.text = message
@@ -71,7 +75,7 @@ class FMAlertDialog constructor(
     }
 
     override fun onBackPressed() {
-        pCancelButton?.invoke(this) ?: dismiss()
+        if (useBackKey) pCancelButton?.invoke(this) ?: dismiss()
     }
 }
 
