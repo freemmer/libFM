@@ -66,3 +66,4 @@ fastlane/readme.md
 .idea/encodings.xml
 app/google-services-encrypted
 .idea/misc.xml
+.idea/

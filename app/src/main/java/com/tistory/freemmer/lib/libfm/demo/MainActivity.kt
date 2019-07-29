@@ -2,8 +2,8 @@ package com.tistory.freemmer.lib.libfm.demo
 
 import android.Manifest
 import android.os.Bundle
-import android.support.design.widget.Snackbar
 import android.widget.Toast
+import com.google.android.material.snackbar.Snackbar
 import com.tistory.freemmer.lib.libfm.logger.FMLog
 import com.tistory.freemmer.lib.libfm.notification.FMINotification
 import com.tistory.freemmer.lib.libfm.notification.FMNotification
