@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1014380895637",
+    "firebase_url": "https://libfmdemo.firebaseio.com",
+    "project_id": "libfmdemo",
+    "storage_bucket": "libfmdemo.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1014380895637:android:05d92937a86bd3e3",
+        "android_client_info": {
+          "package_name": "com.tistory.freemmer.lib.libfm.demo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1014380895637-u627274dp1sv99mlng9uuo0er01dkdsf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAZupiB5gJTt5BmRvu3WIz7bm954i0YG0M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1014380895637-u627274dp1sv99mlng9uuo0er01dkdsf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
