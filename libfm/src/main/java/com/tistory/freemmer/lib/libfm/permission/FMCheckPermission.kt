@@ -194,6 +194,7 @@ abstract class FMCheckPermissionAppCompatActivity: AppCompatActivity() {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
         checker.onActivityResult(requestCode)
     }
 }
@@ -218,6 +219,7 @@ abstract class FMCheckPermissionAppFragmentActivity: FragmentActivity() {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
         checker?.onActivityResult(requestCode)
     }
 }

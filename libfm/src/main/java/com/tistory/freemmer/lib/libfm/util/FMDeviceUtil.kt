@@ -122,7 +122,7 @@ class FMDeviceUtil private constructor(
         return strPhoneNO
     }
 
-    fun getPhoneIMEI(): String? {
+    /*fun getPhoneIMEI(): String? {
         val telephonyManager = context.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
         var strPhoneIMEI: String? = null
         if (ActivityCompat.checkSelfPermission(context, Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED) {
@@ -133,7 +133,7 @@ class FMDeviceUtil private constructor(
             }
         }
         return strPhoneIMEI
-    }
+    }*/
 
     fun isTabletDevice(): Boolean {
         val conf = context.resources.configuration
