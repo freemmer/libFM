@@ -1,5 +1,6 @@
 ![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)
 [![](https://jitpack.io/v/freemmer/libFM.svg)](https://jitpack.io/#freemmer/libFM)
+[![CircleCI](https://circleci.com/gh/freemmer/libFM.svg?style=svg)](https://circleci.com/gh/freemmer/libFM)
 
 # libFM
 Logger, BeanManager, Utils etc for Android Library (Kotlin)
@@ -28,7 +29,7 @@ allprojects {
 App build.gradle
 ```Groovy
 dependencies {
-    implementation 'com.github.freemmer:libFM:1.2.7'
+    implementation 'com.github.freemmer:libFM:1.3.3'
 }
 ```
 
