@@ -3,14 +3,39 @@
 # Check https://circleci.com/docs/2.0/language-android/ for more details
 #
 version: 2
-jobs:
-  build:
-    working_directory: ~/libFM
+
+references:
+  workspace_root: &workspace_root
+  ~/libFM
+
+  container_config: &container_config
     docker:
       - image: circleci/android:api-28
+
+    working_directory: *workspace_root
+
     environment:
+      TERM: dumb
       GRADLE_OPTS: -Xmx4g -Dorg.gradle.daemon=false
       JVM_OPTS: -Xmx4g
+
+  attach_workspace: &attach_workspace
+      attach_workspace:
+        at: *workspace_root
+
+  general_cache_key: &general_cache_key
+    key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
+    #key: app-{{ checksum "build.gradle.kts" }}-{{ checksum "app/build.gradle.kts" }}-{{ checksum ".circleci/config.yml" }}-{{ checksum "gradle.properties" }}-{{ checksum "gradle/wrapper/gradle-wrapper.properties" }}
+
+jobs:
+  build:
+    <<: *container_config
+    # working_directory: ~/libFM
+    # docker:
+    #   - image: circleci/android:api-28
+    # environment:
+    #   GRADLE_OPTS: -Xmx4g -Dorg.gradle.daemon=false
+    #   JVM_OPTS: -Xmx4g
     steps:
       - checkout
       - restore_cache:
@@ -22,9 +47,10 @@ jobs:
           name: Download Dependencies
           command: ./gradlew androidDependencies
       - save_cache:
+          <<: *general_cache_key
           paths:
             - ~/.gradle
-          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
+          # key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
       - run:
           name: Run Tests
           command: ./gradlew lint test

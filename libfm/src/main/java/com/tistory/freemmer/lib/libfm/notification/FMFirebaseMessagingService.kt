@@ -3,6 +3,7 @@ package com.tistory.freemmer.lib.libfm.notification
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import com.tistory.freemmer.lib.libfm.LibFM
+import java.util.*
 
 /**
  * Created by freemmer on 29/01/2019.
@@ -27,8 +28,11 @@ class FMFirebaseMessagingService : FirebaseMessagingService() {
         // Check if message contains a notification payload.
         remoteMessage?.notification?.let {
             log?.d("Message Notification Body: ${it.body}")
-            FMNotification.instance(this).sendNotification((0..1000000).random(), it.title, it.body
-                , remoteMessage.toIntent()?.extras)
+            FMNotification.instance(this).sendNotification(
+                Random().nextInt(1000000), // (0..1000000).random()
+                it.title,
+                it.body,
+                remoteMessage.toIntent()?.extras)
             return
         }
 
@@ -43,8 +47,11 @@ class FMFirebaseMessagingService : FirebaseMessagingService() {
             FMNotification.PAYLOAD_BODY_KEY?.let { key ->
                 body = remoteMessage.data[key] ?: "Empty Title"
             }
-            FMNotification.instance(this).sendNotification((0..1000000).random(), title, body
-                , remoteMessage.toIntent()?.extras)
+            FMNotification.instance(this).sendNotification(
+                Random().nextInt(1000000), //(0..1000000).random(),
+                title,
+                body,
+                remoteMessage.toIntent()?.extras)
             //FMJobService.scheduleJob(this, "FCM")
         }
     }
