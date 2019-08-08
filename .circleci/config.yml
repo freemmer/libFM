@@ -6,7 +6,7 @@ version: 2
 
 references:
   workspace_root: &workspace_root
-  ~/libFM
+    ~/libFM
 
   container_config: &container_config
     docker:
