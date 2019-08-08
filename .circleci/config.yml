@@ -43,6 +43,7 @@ jobs:
           <<: *general_cache_key
           paths:
             - ~/.gradle
+            - "~/.m2"
 
       - run:
           name: Debug Build
