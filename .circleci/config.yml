@@ -50,17 +50,18 @@ references:
       root: . # *workspace
       paths:
         - .
-#        - app/build/outputs/androidTest-results
-#        - app/build/outputs/apk
-#        - app/build/outputs/code-coverage
-#        - app/build/test-results
+        - app/build/outputs/androidTest-results
+        - app/build/outputs/apk
+        - app/build/outputs/code-coverage
+        - app/build/test-results
   attach_firebase_workspace: &attach_firebase_workspace
     attach_workspace:
       at: *workspace
   persist_firebase_workspace: &persist_firebase_workspace
     persist_to_workspace:
-      root: *workspace
+      root: . # *workspace
       paths:
+        - .
         - firebase
 
   ## Docker image configurations
