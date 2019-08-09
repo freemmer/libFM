@@ -47,7 +47,7 @@ references:
       at: *workspace
   persist_debug_workspace: &persist_debug_workspace
     persist_to_workspace:
-      root: *workspace
+      root: . # *workspace
       paths:
         - app/build/outputs/androidTest-results
         - app/build/outputs/apk
